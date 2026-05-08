@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiMo 黑球交互 Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <span class="logo">Xiaomi MiMo</span>
+    <span class="links">Blog &nbsp; Join us</span>
+  </header>
+
+  <section class="hero">
+    <!-- 底层:浅色背景 + 黑色文字 -->
+    <div class="layer base">
+      <div class="pattern" id="patternBase"></div>
+      <h1 class="title">你好,我是 MiMo</h1>
+    </div>
+
+    <!-- 顶层:深色背景 + 白色文字,被圆形 clip-path 切成"黑球"
+         注意顶层文字共用"你好,"前缀和"MiMo"后缀,只把中间"我是 "替换成"I'M ",
+         这样球边切过时两层前后段完全重合,只在中段呈现"翻译"效果。 -->
+    <div class="layer reveal" id="reveal">
+      <div class="pattern" id="patternReveal"></div>
+      <h1 class="title">你好, I'M MiMo</h1>
+    </div>
+  </section>
+
+  <p class="hint">移动鼠标 / Move your cursor</p>
+
+  <script src="script.js"></script>
+</body>
+</html>

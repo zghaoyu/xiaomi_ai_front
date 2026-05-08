@@ -1,0 +1,112 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+  cursor: none; /* 隐藏默认指针,黑球本身就是一个大光标 */
+}
+
+/* ---------------- 顶部导航 ---------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 10;
+  pointer-events: none;
+  /* 让导航文字也跟着球反相,过球时自动变色 */
+  mix-blend-mode: difference;
+  color: #fff;
+  font-weight: 600;
+}
+.logo { letter-spacing: 1px; font-size: 18px; }
+.links { font-size: 14px; opacity: 0.8; }
+
+/* ---------------- 主舞台 ---------------- */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.base {
+  background: #f3efe7;
+  color: #0a0a0a;
+}
+
+.reveal {
+  background: #0a0a0a;
+  color: #fff;
+  /* 默认让球出现在右侧,鼠标进来后由 JS 接管 */
+  clip-path: circle(220px at 80% 50%);
+  will-change: clip-path;
+}
+
+/* ---------------- 主标题 ----------------
+   关键:两层标题都用"右对齐 + 同一锚点",
+   这样不论哪层,结尾的 "MiMo" 都落在同一个 x 位置,
+   球边切过时不会出现错位重影。
+*/
+.title {
+  position: absolute;
+  top: 50%;
+  right: 22%;             /* 两层共用的右锚点 */
+  transform: translateY(-50%);
+  text-align: right;
+  font-size: clamp(48px, 9vw, 144px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 2;
+}
+
+/* ---------------- 背景平铺图案 ---------------- */
+.pattern {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 96px;
+  font-weight: 700;
+  letter-spacing: 24px;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.base .pattern { color: #0a0a0a; opacity: 0.06; }
+.reveal .pattern { color: #fff; opacity: 0.15; }
+
+.pattern-row {
+  display: flex;
+  justify-content: space-around;
+  /* 奇偶行错开,让"M I M O"看起来不是死板对齐 */
+}
+.pattern-row.odd { transform: translateX(60px); }
+
+/* ---------------- 提示文字 ---------------- */
+.hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 2px;
+  z-index: 10;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #aaa;
+}
