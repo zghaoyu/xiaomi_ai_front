@@ -1,16 +1,9 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html, body {
-  height: 100%;
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
-  overflow: hidden;
-  cursor: none; /* 隐藏默认指针,黑球本身就是一个大光标 */
-}
-
 /* ---------------- 顶部导航 ---------------- */
 .nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 64px;
   display: flex;
   align-items: center;
@@ -23,8 +16,16 @@ html, body {
   color: #fff;
   font-weight: 600;
 }
-.logo { letter-spacing: 1px; font-size: 18px; }
-.links { font-size: 14px; opacity: 0.8; }
+
+.logo {
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.links {
+  font-size: 14px;
+  opacity: 0.8;
+}
 
 /* ---------------- 主舞台 ---------------- */
 .hero {
@@ -42,6 +43,7 @@ html, body {
 .base {
   background: #f3efe7;
   color: #0a0a0a;
+  z-index: 1;             /* 建立层叠上下文,把内部 .title 的 z-index 关在本层 */
 }
 
 .reveal {
@@ -50,6 +52,7 @@ html, body {
   /* 默认让球出现在右侧,鼠标进来后由 JS 接管 */
   clip-path: circle(220px at 80% 50%);
   will-change: clip-path;
+  z-index: 2;             /* 整层在 base 之上,黑球内部就能完整遮住底层中文 */
 }
 
 /* ---------------- 主标题 ----------------
@@ -86,15 +89,26 @@ html, body {
   overflow: hidden;
   white-space: nowrap;
 }
-.base .pattern { color: #0a0a0a; opacity: 0.06; }
-.reveal .pattern { color: #fff; opacity: 0.15; }
 
-.pattern-row {
+.base .pattern {
+  color: #0a0a0a;
+  opacity: 0.06;
+}
+
+.reveal .pattern {
+  color: #fff;
+  opacity: 0.15;
+}
+
+.patternRow {
   display: flex;
   justify-content: space-around;
-  /* 奇偶行错开,让"M I M O"看起来不是死板对齐 */
 }
-.pattern-row.odd { transform: translateX(60px); }
+
+/* 奇偶行错开,让"M I M O"看起来不是死板对齐 */
+.odd {
+  transform: translateX(60px);
+}
 
 /* ---------------- 提示文字 ---------------- */
 .hint {
@@ -103,7 +117,6 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   font-size: 13px;
-  color: #888;
   letter-spacing: 2px;
   z-index: 10;
   pointer-events: none;
